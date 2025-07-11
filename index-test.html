@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 15 DAYS</title>
+    <link rel="stylesheet" href="./assets/function.js">
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+    <!-- Day 1 -->
+     <div class="day1">
+        <div class="easy">
+            <div>
+                <label for="">x</label>
+                <input type="number" id="easy__input-x">
+            </div>
+            
+            <div>
+                <label for="">y</label>
+                <input type="number" id="easy__input-y">
+            </div>
+            <div>
+                <label for="">Expression:</label>
+                <button class="add">+</button>
+                <button class="sub">-</button>
+                <button class="multi">x</button>
+                <button class="division">/</button>
+            </div>
+            <div>
+                <button id="easy__button">Area of ​​the rectangle</button>
+                <div class="easy__result"></div>
+            </div>
+
+        </div>
+
+        <div class="convert-C-F">
+            <div>
+                <label for="">C</label>
+                <input type="number" id="easy__input-c">
+            </div>
+            
+            <div>
+                <label for="">F</label>
+                <input type="number" id="easy__input-f">
+            </div>
+            <div>
+                <button id="convert__button-1">C to F</button>
+                <button id="convert__button-2">F to C</button>
+                <div class="convert__result"></div>
+            </div>
+        </div>
+        <div class="change-currency">
+            <div>
+                <label for="">VND</label>
+                <input type="number" id="easy__input-vnd">
+            </div>
+            
+            <div>
+                <label for="">USD</label>
+                <input type="number" id="easy__input-usd">
+            </div>
+            <div>
+                <button id="convert__currency1">VND to USD</button>
+                <button id="convert__currency2">USD to VND</button>
+                <div class="currency-result"></div>
+            </div>
+        </div>
+     </div>
+
+
+     //options 2
+     <button class="operator-btn" data-operator="add">+</button>
+<button class="operator-btn" data-operator="sub">-</button>
+<button class="operator-btn" data-operator="multi">*</button>
+<button class="operator-btn" data-operator="division">/</button>
+<button id="easy__button" class="operator-btn" data-operator="multi">Tính toán</button>
+<script>
+    const easyInput1 = document.querySelector('#easy__input-x');
+const easyInput2 = document.querySelector('#easy__input-y');
+const easyResult = document.querySelector('.easy__result');
+
+// Lấy TẤT CẢ các nút có class 'operator-btn'
+const operatorButtons = document.querySelectorAll('.operator-btn');
+
+function calculateAndDisplay(operator) {
+    const inputValue1 = Number(easyInput1.value);
+    const inputValue2 = Number(easyInput2.value);
+
+    if (easyInput1.value.trim() === '' || isNaN(inputValue1) ||
+        easyInput2.value.trim() === '' || isNaN(inputValue2)) {
+        easyResult.textContent = 'Vui lòng nhập giá trị số hợp lệ vào cả hai ô!';
+        return;
+    }
+
+    let result;
+    let operationSymbol;
+
+    switch (operator) {
+        case 'add':
+            result = inputValue1 + inputValue2;
+            operationSymbol = '+';
+            break;
+        case 'sub':
+            result = inputValue1 - inputValue2;
+            operationSymbol = '-';
+            break;
+        case 'multi':
+            result = inputValue1 * inputValue2;
+            operationSymbol = '*';
+            break;
+        case 'division':
+            if (inputValue2 === 0) {
+                easyResult.textContent = 'Không thể chia cho 0!';
+                return;
+            }
+            result = inputValue1 / inputValue2;
+            operationSymbol = '/';
+            break;
+        default:
+            easyResult.textContent = 'Toán tử không hợp lệ.';
+            return;
+    }
+    easyResult.textContent = `Kết quả: ${inputValue1} ${operationSymbol} ${inputValue2} = ${result}`;
+}
+
+// Lặp qua từng nút và gán sự kiện
+operatorButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Lấy giá trị từ thuộc tính data-operator
+        const operator = this.dataset.operator;
+        calculateAndDisplay(operator);
+    });
+});
+</script>
+     <script src="./assets/function.js"></script>
+</body>
+</html>
